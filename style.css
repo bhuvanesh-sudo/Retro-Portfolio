@@ -1,0 +1,412 @@
+/* ========================================= */
+/* === 1. SETUP & VARIABLES              === */
+/* ========================================= */
+:root {
+    --neon-green: #39ff14;
+    --neon-pink: #ff00ff;
+    --neon-blue: #00ffff;
+    --neon-yellow: #ffff00;
+    --dark-bg: #111;
+    --crt-overlay: rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: crosshair; /* Adds to the retro game feel */
+}
+
+body {
+    background-color: #000;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    overflow: hidden;
+    color: var(--neon-green);
+}
+
+/* ========================================= */
+/* === 2. THE CRT MONITOR SHELL          === */
+/* ========================================= */
+.monitor-bezel {
+    width: 98vw;
+    height: 97vh;
+    background: #222;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,1), 0 0 30px rgba(0, 255, 255, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen-container {
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg);
+    position: relative;
+    overflow-y: auto; /* Enable scrolling inside the screen */
+    border: 2px solid var(--neon-blue);
+    box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    
+    /* Custom Scrollbar Styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-green) #000;
+}
+
+/* Webkit Scrollbar (Chrome/Safari) */
+.screen-container::-webkit-scrollbar { width: 10px; }
+.screen-container::-webkit-scrollbar-track { background: #000; }
+.screen-container::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 5px; }
+
+/* The Scanline Overlay (Stays fixed over content) */
+.screen-container::after {
+    content: " ";
+    display: block;
+    position: sticky;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(var(--crt-overlay) 50%, rgba(0, 0, 0, 0) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 99;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+}
+
+/* Content Wrapper */
+.screen-content {
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.98; }
+    50% { opacity: 1; }
+    100% { opacity: 0.99; }
+}
+
+/* ========================================= */
+/* === 3. HERO SECTION                   === */
+/* ========================================= */
+.hero { margin: 40px 0 60px 0; }
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+}
+
+.avatar-frame {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border: 4px solid var(--neon-pink);
+    box-shadow: 0 0 20px var(--neon-pink);
+    flex-shrink: 0;
+}
+
+.player-avatar {
+    width: 100%; height: 100%; object-fit: cover;
+    /* Retro Photo Filter */
+    filter: grayscale(100%) sepia(100%) hue-rotate(50deg) saturate(300%) contrast(1.2); 
+}
+
+.hero-text { flex-grow: 1; max-width: 600px; }
+
+h1 { font-family: 'Press Start 2P', cursive; color: var(--neon-pink); font-size: 2.5rem; line-height: 1.4; margin-bottom: 15px; }
+.subtitle { font-size: 1.8rem; margin-bottom: 15px; letter-spacing: 1px; }
+.highlight { text-shadow: 3px 3px var(--neon-blue); }
+
+.social-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+.retro-link {
+    color: var(--neon-blue); text-decoration: none; font-size: 1.2rem;
+    padding: 5px 10px; border: 1px solid transparent; transition: 0.2s;
+}
+.retro-link:hover {
+    background: var(--neon-blue); color: #000;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.divider { border: 0; border-bottom: 2px dashed var(--neon-green); opacity: 0.3; margin: 60px 0; }
+
+/* ========================================= */
+/* === 4. PROJECTS (STAGE SELECT)        === */
+/* ========================================= */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.card {
+    border: 4px solid;
+    background: rgba(0, 20, 0, 0.85);
+    transition: transform 0.2s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body { padding: 25px; flex-grow: 1; }
+.card h3 { margin-bottom: 15px; font-size: 1.4rem; font-family: 'Press Start 2P'; line-height: 1.5; }
+.card p { font-size: 1.1rem; line-height: 1.4; }
+
+/* Card Buttons */
+.card-actions {
+    border-top: 2px dashed rgba(255,255,255,0.2);
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    background: rgba(0,0,0,0.3);
+}
+
+.btn-retro {
+    flex: 1; text-align: center; padding: 12px 0; text-decoration: none;
+    font-family: 'Press Start 2P'; font-size: 0.7rem;
+    background: currentColor; color: #000;
+    transition: all 0.2s;
+}
+.btn-retro:hover { transform: translateY(-3px); box-shadow: 0 4px 0 rgba(0,0,0,0.5); }
+
+/* Theme Utilities */
+.theme-green { border-color: var(--neon-green); color: var(--neon-green); }
+.theme-blue { border-color: var(--neon-blue); color: var(--neon-blue); }
+.theme-pink { border-color: var(--neon-pink); color: var(--neon-pink); }
+.theme-yellow { border-color: var(--neon-yellow); color: var(--neon-yellow); }
+
+.card::before {
+    content: 'STAGE ' attr(data-stage);
+    position: absolute; top: -14px; left: 15px;
+    background: inherit; color: #000;
+    padding: 4px 8px;
+    font-family: 'Press Start 2P'; font-size: 0.7rem;
+    background-color: currentColor;
+}
+
+/* ========================================= */
+/* === 5. QUEST LOG (TIMELINE)           === */
+/* ========================================= */
+.timeline {
+    position: relative;
+    border-left: 4px dashed var(--neon-blue);
+    margin-left: 10px;
+    padding-left: 30px;
+}
+
+.timeline-item { margin-bottom: 40px; position: relative; }
+
+.timeline-marker {
+    position: absolute; left: -41px; top: 5px;
+    width: 18px; height: 18px;
+    background: #000; border: 4px solid var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.timeline-content {
+    background: rgba(0, 20, 0, 0.6);
+    border: 1px solid var(--neon-green);
+    padding: 15px;
+    position: relative;
+}
+
+.timeline-content::before {
+    content: ''; position: absolute; left: -30px; top: 12px;
+    width: 30px; height: 2px; background: var(--neon-blue);
+}
+
+.date {
+    display: block; font-size: 0.9rem; color: var(--neon-blue);
+    margin-bottom: 5px; font-family: 'Press Start 2P';
+}
+
+/* ========================================= */
+/* === 6. SKILLS & UI ELEMENTS           === */
+/* ========================================= */
+h2 {
+    color: var(--neon-blue);
+    border-bottom: 4px dashed var(--neon-blue);
+    padding-bottom: 15px;
+    font-family: 'Press Start 2P';
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+.skill-container { margin-bottom: 25px; }
+.skill-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.4rem; }
+
+.health-bar-border {
+    border: 3px solid; height: 35px; padding: 4px; background: #000;
+}
+
+.health-bar-fill {
+    height: 100%; width: 0%;
+    transition: width 1.5s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+}
+
+/* Blocky Gradient Fills */
+.theme-pink .health-bar-fill { background: repeating-linear-gradient(90deg, var(--neon-pink), var(--neon-pink) 10px, transparent 10px, transparent 12px); }
+.theme-blue .health-bar-fill { background: repeating-linear-gradient(90deg, var(--neon-blue), var(--neon-blue) 10px, transparent 10px, transparent 12px); }
+.theme-green .health-bar-fill { background: repeating-linear-gradient(90deg, var(--neon-green), var(--neon-green) 10px, transparent 10px, transparent 12px); }
+
+/* UI Header Bar */
+.ui-bar {
+    display: flex; justify-content: space-between;
+    margin-bottom: 20px; font-size: 1.2rem; opacity: 0.7;
+}
+
+.blink-text {
+    animation: blinker 1s linear infinite;
+    color: var(--neon-pink); font-family: 'Press Start 2P'; font-size: 0.8rem;
+}
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* ========================================= */
+/* === 7. FLOATING SAVE BUTTON           === */
+/* ========================================= */
+.floating-save-btn {
+    position: absolute; bottom: 30px; right: 40px;
+    background: var(--neon-pink); color: #000;
+    padding: 15px 20px;
+    font-family: 'Press Start 2P'; font-size: 0.8rem;
+    text-decoration: none;
+    border: 4px solid #fff;
+    box-shadow: 5px 5px 0px #000;
+    z-index: 100;
+    animation: bounce 2s infinite;
+}
+
+.floating-save-btn:hover { background: #fff; transform: translateY(-2px); }
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
+}
+
+footer { margin-top: 80px; text-align: center; opacity: 0.5; padding-bottom: 20px; }
+
+/* ========================================= */
+/* === 8. MOBILE RESPONSIVENESS          === */
+/* ========================================= */
+@media (max-width: 768px) {
+    /* Thin bezel on mobile */
+    .monitor-bezel { width: 100vw; height: 100vh; padding: 10px; border-radius: 0; }
+    .screen-content { padding: 20px; }
+
+    /* Stack Hero */
+    .hero-content { flex-direction: column; text-align: center; gap: 20px; }
+    .hero-text { width: 100%; }
+    .social-links { justify-content: center; }
+
+    /* Font Sizes */
+    h1 { font-size: 1.8rem; }
+    .subtitle { font-size: 1.2rem; }
+    
+    /* Layouts */
+    .grid { grid-template-columns: 1fr; }
+    .card-actions { flex-direction: column; }
+    
+    /* Stop Floating Button from floating on mobile */
+    .floating-save-btn {
+        position: static; display: block;
+        text-align: center; margin-top: 40px; width: 100%;
+        animation: none;
+    }
+    
+    /* Adjust UI Bar */
+    .ui-bar { font-size: 0.9rem; }
+    .location-tag { display: none; } /* Hide location if screen is too small */
+}
+
+/* ========================================= */
+/* === 9. 3D SYSTEM CORE (SPINNING CUBE) === */
+/* ========================================= */
+
+.cube-wrapper {
+    /* Fixed Positioning Logic */
+    position: absolute;
+    top: 60px;   /* Distance from top of Monitor Bezel */
+    right: 60px; /* Distance from right of Monitor Bezel */
+    z-index: 1000; /* Stays on top of everything */
+    pointer-events: none; /* Let clicks pass through to the scrollbar/content */
+    
+    /* Size & 3D Setup */
+    width: 80px;
+    height: 80px;
+    perspective: 800px;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spin 8s infinite linear;
+}
+
+/* The Faces */
+.face {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--neon-blue);
+    background: rgba(0, 255, 255, 0.05); /* Very transparent so text is visible behind */
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Positioning Faces */
+.front  { transform: rotateY(0deg) translateZ(40px); }
+.back   { transform: rotateY(180deg) translateZ(40px); }
+.right  { transform: rotateY(90deg) translateZ(40px); }
+.left   { transform: rotateY(-90deg) translateZ(40px); }
+.top    { transform: rotateX(90deg) translateZ(40px); }
+.bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+/* Inner Core */
+.cube-inner {
+    position: absolute;
+    top: 20px; left: 20px;
+    width: 40px; height: 40px;
+    background: var(--neon-pink);
+    opacity: 0.6;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    box-shadow: 0 0 15px var(--neon-pink);
+    animation: spin-reverse 4s infinite linear;
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+@keyframes spin-reverse {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(-360deg) rotateY(-360deg); }
+}
+
+/* MOBILE ADJUSTMENT */
+@media (max-width: 768px) {
+    .cube-wrapper {
+        /* On mobile, the corner is too crowded. 
+           We move it to the bottom right or hide it. 
+           Let's scale it down and put it top-right */
+        top: 20px;
+        right: 20px;
+        transform: scale(0.6);
+        opacity: 0.5; /* Dim it so it doesn't distract from reading */
+    }
+}
