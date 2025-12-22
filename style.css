@@ -162,23 +162,88 @@ h1 { font-family: 'Press Start 2P', cursive; color: var(--neon-pink); font-size:
 .card-body { padding: 25px; flex-grow: 1; }
 .card h3 { margin-bottom: 15px; font-size: 1.4rem; font-family: 'Press Start 2P'; line-height: 1.5; }
 .card p { font-size: 1.1rem; line-height: 1.4; }
+/* ========================================= */
+/* === UPDATED BUTTON STYLES             === */
+/* ========================================= */
 
-/* Card Buttons */
 .card-actions {
     border-top: 2px dashed rgba(255,255,255,0.2);
     padding: 15px;
     display: flex;
     gap: 15px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.5); /* Slightly darker to make buttons pop */
+    margin-top: auto; /* Pushes buttons to the bottom of card */
 }
 
+/* Base Button Layout */
 .btn-retro {
-    flex: 1; text-align: center; padding: 12px 0; text-decoration: none;
-    font-family: 'Press Start 2P'; font-size: 0.7rem;
-    background: currentColor; color: #000;
+    flex: 1; 
+    text-align: center; 
+    padding: 12px 0; 
+    text-decoration: none;
+    font-family: 'Press Start 2P'; 
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
     transition: all 0.2s;
+    border: 2px solid transparent; /* Prepare for hover border */
+    cursor: pointer;
+    display: block; /* Ensures it takes up space */
 }
-.btn-retro:hover { transform: translateY(-3px); box-shadow: 0 4px 0 rgba(0,0,0,0.5); }
+
+/* --- THEME ADAPTATION (The Fix) --- */
+
+/* 1. GREEN THEME BUTTONS */
+.theme-green .btn-retro {
+    background-color: var(--neon-green);
+    color: #000; /* Black text on bright green */
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.4); /* Green Glow */
+}
+.theme-green .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+/* 2. BLUE THEME BUTTONS */
+.theme-blue .btn-retro {
+    background-color: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+.theme-blue .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* 3. PINK THEME BUTTONS */
+.theme-pink .btn-retro {
+    background-color: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+}
+.theme-pink .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-pink);
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+/* 4. YELLOW THEME BUTTONS (If used) */
+.theme-yellow .btn-retro {
+    background-color: var(--neon-yellow);
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.4);
+}
+.theme-yellow .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-yellow);
+    border-color: var(--neon-yellow);
+    box-shadow: 0 0 15px var(--neon-yellow);
+}
 
 /* Theme Utilities */
 .theme-green { border-color: var(--neon-green); color: var(--neon-green); }
