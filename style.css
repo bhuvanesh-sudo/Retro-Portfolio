@@ -57,6 +57,7 @@ body {
     /* Custom Scrollbar Styling */
     scrollbar-width: thin;
     scrollbar-color: var(--neon-green) #000;
+    scroll-behavior: auto;
 }
 
 /* Webkit Scrollbar (Chrome/Safari) */
@@ -76,6 +77,7 @@ body {
     z-index: 99;
     background-size: 100% 4px, 3px 100%;
     pointer-events: none;
+    scroll-behavior: auto;
 }
 
 /* Content Wrapper */

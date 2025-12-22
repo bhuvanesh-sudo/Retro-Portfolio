@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- 0. LENIS SMOOTH SCROLL (INTERNAL DIV) ---
+    // We target '.screen-container' because that's where your scrollbar is!
+    const scrollContainer = document.querySelector('.screen-container');
+    
+    const lenis = new Lenis({
+        wrapper: scrollContainer, // The element that has overflow: auto
+        content: document.querySelector('.screen-content'), // The content inside
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
     
     // --- 1. Dynamic Clock ---
     // Updates the time in the top-right corner every second
