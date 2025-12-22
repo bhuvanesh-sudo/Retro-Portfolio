@@ -491,3 +491,21 @@ footer { margin-top: 80px; text-align: center; opacity: 0.5; padding-bottom: 20p
 .social-links .icon { width: 32px; height: 32px; }
 .social-links .retro-link { display: flex; align-items: center; gap: 10px; padding: 8px 12px; }
 
+/* Add this to the SKILLS section of style.css */
+
+/* Define the Yellow Theme for Health Bars */
+.theme-yellow .health-bar-fill {
+    background: repeating-linear-gradient(
+        90deg, 
+        var(--neon-yellow), 
+        var(--neon-yellow) 10px, 
+        transparent 10px, 
+        transparent 12px
+    );
+}
+
+/* Ensure the border color matches the theme */
+.health-bar-border.theme-yellow {
+    border-color: var(--neon-yellow);
+    color: var(--neon-yellow); /* For any text inside if needed */
+}
