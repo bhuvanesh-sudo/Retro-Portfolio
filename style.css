@@ -6,6 +6,11 @@
     --neon-pink: #ff00ff;
     --neon-blue: #00ffff;
     --neon-yellow: #ffff00;
+    --neon-red: #ff3333;   
+    --neon-purple: #bd00ff;
+    --neon-orange: #ffb800;
+    --neon-cyan: #00ffff;   
+    --neon-white: #f0f0f0;
     --dark-bg: #111;
     --crt-overlay: rgba(0, 0, 0, 0.15);
 }
@@ -247,11 +252,68 @@ h1 { font-family: 'Press Start 2P', cursive; color: var(--neon-pink); font-size:
     box-shadow: 0 0 15px var(--neon-yellow);
 }
 
+/* --- Red Theme --- */
+.theme-red .btn-retro {
+    background-color: var(--neon-red);
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+}
+.theme-red .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-red);
+    border-color: var(--neon-red);
+    box-shadow: 0 0 15px var(--neon-red);
+}
+
+/* --- Purple Theme --- */
+.theme-purple .btn-retro {
+    background-color: var(--neon-purple);
+    color: #fff; /* White text looks better on dark purple */
+    box-shadow: 0 0 10px rgba(189, 0, 255, 0.4);
+}
+.theme-purple .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-purple);
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+/* --- Orange Theme --- */
+.theme-orange .btn-retro {
+    background-color: var(--neon-orange);
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 184, 0, 0.4);
+}
+.theme-orange .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-orange);
+    border-color: var(--neon-orange);
+    box-shadow: 0 0 15px var(--neon-orange);
+}
+
+/* --- Cyan Theme --- */
+.theme-cyan .btn-retro {
+    background-color: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+.theme-cyan .btn-retro:hover {
+    background-color: transparent;
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
 /* Theme Utilities */
 .theme-green { border-color: var(--neon-green); color: var(--neon-green); }
 .theme-blue { border-color: var(--neon-blue); color: var(--neon-blue); }
 .theme-pink { border-color: var(--neon-pink); color: var(--neon-pink); }
 .theme-yellow { border-color: var(--neon-yellow); color: var(--neon-yellow); }
+.theme-red { border-color: var(--neon-red); color: var(--neon-red); }
+.theme-purple { border-color: var(--neon-purple); color: var(--neon-purple); }
+.theme-orange { border-color: var(--neon-orange); color: var(--neon-orange); }
+.theme-cyan { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+.theme-white { border-color: var(--neon-white); color: var(--neon-white); }
 
 .card::before {
     content: 'STAGE ' attr(data-stage);
