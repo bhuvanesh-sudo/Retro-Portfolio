@@ -179,10 +179,10 @@ function initTypewriter() {
     if (!el) return;
 
     const lines = [
-        'EXPLORING SYSTEMS BENEATH THE SURFACE.',
-        'BUILDING SMART CONTRACTS & SMARTER UI.',
-        'COMPSCI UNDERGRAD // CLASS OF 2027.',
-        'AVAILABLE FOR INTERNSHIPS & COLLAB.',
+        'PRECISION WHERE IT COUNTS.',
+        'DETAILS MATTER. SO DOES THE BIGGER PICTURE.',
+        'COMPSCI UNDERGRAD. CLASS OF 2027.',
+        'OPEN TO NEW OPPORTUNITES.',
     ];
 
     let lineIdx  = 0;
